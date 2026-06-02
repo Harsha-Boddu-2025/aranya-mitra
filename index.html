@@ -25,7 +25,6 @@
   .te { font-family: "Noto Sans Telugu", "Hanken Grotesk", sans-serif; }
   .wrap { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 18px 18px 64px; }
 
-  /* ---- Hero slideshow ---- */
   .hero { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 22px 50px -26px rgba(0,0,0,0.85); aspect-ratio: 5 / 3; }
   .slide { position: absolute; inset: 0; opacity: 0; animation: fade 21s infinite; }
   .slide:nth-child(1) { animation-delay: 0s; }
@@ -50,9 +49,6 @@
 
   .card { background: var(--paper); color: var(--bark); border-radius: 20px; padding: 18px; margin-bottom: 14px; box-shadow: 0 16px 34px -24px rgba(0,0,0,0.7); }
   label.lbl { display: block; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--pine); margin-bottom: 9px; }
-  .hint { font-size: 0.8rem; opacity: 0.62; margin-top: 8px; }
-  input[type=password], input[type=text] { width: 100%; font: inherit; padding: 13px 15px; border-radius: 12px; border: 1.5px solid #ddd6c4; background: #fff; color: var(--bark); }
-  input:focus { outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgba(76,175,109,0.18); }
 
   .drop { border: 2px dashed rgba(46,107,67,0.42); border-radius: 16px; padding: 32px 16px; text-align: center; cursor: pointer; transition: .18s; background: #eef4e8; color: var(--pine); }
   .drop:hover { background: #e6f1de; border-color: var(--leaf); }
@@ -61,6 +57,8 @@
   .drop .ic { font-size: 1.8rem; }
   .drop .t { font-weight: 600; margin-top: 7px; }
   .drop .s { font-size: 0.82rem; opacity: 0.7; margin-top: 3px; }
+  input[type=text] { width: 100%; font: inherit; padding: 13px 15px; border-radius: 12px; border: 1.5px solid #ddd6c4; background: #fff; color: var(--bark); }
+  input[type=text]:focus { outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgba(76,175,109,0.18); }
 
   button.go { width: 100%; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.1rem; color: #fff; border: none; border-radius: 14px; padding: 16px;
     background: linear-gradient(135deg, var(--leaf), var(--pine)); cursor: pointer; box-shadow: 0 14px 28px -12px rgba(76,175,109,0.75); transition: .15s; margin-top: 4px; }
@@ -97,7 +95,6 @@
 <div class="wrap">
 
   <div class="hero">
-    <!-- Scene 1: misty dawn -->
     <div class="slide">
       <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -120,7 +117,6 @@
         <g fill="#0f2417"><path d="M16,360 C12,312 30,284 8,254 C40,276 44,312 40,360 Z"/><path d="M584,360 C588,314 568,286 592,258 C560,280 556,314 560,360 Z"/></g>
       </svg>
     </div>
-    <!-- Scene 2: misty valley (Araku) -->
     <div class="slide">
       <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -142,7 +138,6 @@
         <g fill="#0c2417"><path d="M30,360 C26,308 48,280 22,248 C58,272 62,310 58,360 Z"/><path d="M570,360 C574,310 552,282 578,250 C546,274 542,310 546,360 Z"/></g>
       </svg>
     </div>
-    <!-- Scene 3: golden dusk -->
     <div class="slide">
       <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -174,13 +169,6 @@
   <p class="tag te">అడవి మొక్క, ఆకు, పండు లేదా పుట్టగొడుగు ఫోటో తీయండి — అది <b>ప్రమాదకరమా</b> అని తెలుసుకోండి. <span style="opacity:.75">(Photograph a wild plant, leaf, berry or mushroom to check if it's dangerous.)</span></p>
 
   <div class="warn-strip te"><span class="x">⚠️</span><span>ఇది తినదగినదని ఈ యాప్ ఎప్పుడూ చెప్పదు. అనుమానం ఉంటే తినవద్దు. <span style="opacity:.85">This app never says anything is safe to eat.</span></span></div>
-
-  <!-- API key card: auto-hidden once you embed your key in the API_KEY constant below -->
-  <div class="card" id="keyCard">
-    <label class="lbl" for="key">Gemini API Key</label>
-    <input id="key" type="password" placeholder="AIza… (Google AI Studio లో ఉచితంగా)" autocomplete="off" />
-    <p class="hint">Key మీ ఫోన్/బ్రౌజర్‌లోనే ఉంటుంది. Get a free key at aistudio.google.com → "Get API key".</p>
-  </div>
 
   <div class="card">
     <label class="lbl">ఫోటో / Photo</label>
@@ -223,98 +211,55 @@
 </div>
 
 <script>
-  // ===================================================================
-  //  PASTE YOUR FREE GEMINI API KEY BETWEEN THE QUOTES BELOW.
-  //  When it is filled in, the on-screen key box disappears and users
-  //  can just upload a photo and check. Leave it "" during development.
-  // ===================================================================
-  const API_KEY = "";
-
-  // Free-tier multimodal models, tried in order with automatic retry on overload.
-  const MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-
+  // No API key here — the key lives safely in the Netlify function (server-side).
+  const ENDPOINT = "/.netlify/functions/identify";
   const $ = id => document.getElementById(id);
   let imgB64 = null, imgMime = null;
-
-  // Hide the key box if a key is embedded.
-  if (API_KEY) $("keyCard").style.display = "none";
-  const getKey = () => API_KEY || $("key").value.trim();
 
   const drop = $("drop"), fileEl = $("file");
   drop.addEventListener("click", () => fileEl.click());
   fileEl.addEventListener("change", e => {
     const f = e.target.files[0]; if (!f) return;
-    imgMime = f.type || "image/jpeg";
     const r = new FileReader();
-    r.onload = () => { imgB64 = r.result.split(",")[1]; drop.classList.add("has"); drop.innerHTML = '<img alt="preview" src="' + r.result + '">'; };
+    r.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const max = 1024; let w = img.width, h = img.height;
+        if (w > max || h > max) { const s = max / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
+        const c = document.createElement("canvas"); c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        const url = c.toDataURL("image/jpeg", 0.82);
+        imgMime = "image/jpeg"; imgB64 = url.split(",")[1];
+        drop.classList.add("has"); drop.innerHTML = '<img alt="preview" src="' + url + '">';
+      };
+      img.src = r.result;
+    };
     r.readAsDataURL(f);
   });
-
-  const SYSTEM = `You are an extremely cautious botanist and mycologist who helps foragers and children ANYWHERE IN THE WORLD avoid poisoning. You look at a photo of a wild plant, leaf, berry, flower or mushroom that may come from any country or region.
-
-SAFETY RULES — THESE OVERRIDE EVERYTHING:
-- NEVER tell anyone that any wild plant or mushroom is safe or okay to eat. Edibility cannot be confirmed from a photo, and a wrong "safe" can kill a child.
-- "risk_level" may ONLY be one of: "danger", "caution", "unsure". There is no "safe" option.
-- If the photo is unclear, or you are not confident, use "unsure" and clearly advise NOT to eat it.
-- Mushrooms: be especially conservative — many deadly species look like edible ones. Default to "danger" or "unsure" for any mushroom unless clearly a known harmless ornamental.
-- Always assume a child might eat it. The whole point is to warn, not to certify food.
-
-OUTPUT:
-- Reply ONLY with a JSON object, no markdown.
-- The user's note may be written in ANY language. REPLY IN THE SAME LANGUAGE the user wrote their note in. If there is no note, or the language is unclear, reply in simple Telugu. Keep wording simple enough for someone with little schooling. If the note mentions a place or country, use it as a hint for which species are likely; otherwise do not assume any region. likely_name_en is always a short English label.
-- Keep advice practical and calm, not frightening for no reason.
-
-JSON shape:
-{
- "risk_level": "danger|caution|unsure",
- "verdict_te": "ఒక చిన్న వాక్యంలో తీర్పు (ఉదా: ఇది ప్రమాదకరం, తినవద్దు)",
- "likely_name_te": "సంభావ్య పేరు / రకం",
- "likely_name_en": "short english label",
- "what_it_is_te": "ఇది ఏమిటో ఒక వాక్యం",
- "why_dangerous_te": "ఎందుకు ప్రమాదమో సులభంగా",
- "symptoms_te": ["తింటే కలిగే లక్షణాలు 2-4"],
- "first_aid_te": ["ఎవరైనా తినేస్తే వెంటనే చేయవలసినవి 2-4; ఆసుపత్రికి/108కి వెళ్లమని చెప్పండి"]
-}`;
 
   $("go").addEventListener("click", run);
 
   async function run() {
-    const key = getKey();
     $("err").style.display = "none";
-    if (!key) return showErr("ముందుగా Gemini API key ఇవ్వండి. / API key missing.");
     if (!imgB64) return showErr("ఫోటో ఎంచుకోండి. / Please choose a photo first.");
-
     const btn = $("go"); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>పరిశీలిస్తోంది…';
-    const userText = `వినియోగదారు గమనిక: ${$("note").value || "—"}\nఈ ఫోటోను పరిశీలించి, పైన చెప్పిన JSON ఆకృతిలో తెలుగులో జాగ్రత్తగా జవాబు ఇవ్వండి.`;
-    const body = {
-      systemInstruction: { parts: [{ text: SYSTEM }] },
-      contents: [{ parts: [ { text: userText }, { inline_data: { mime_type: imgMime, data: imgB64 } } ] }],
-      generationConfig: { responseMimeType: "application/json", temperature: 0.2 }
-    };
-
-    let lastErr = "";
-    for (let i = 0; i < 5; i++) {
-      const model = MODELS[i % MODELS.length];
-      try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-          { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key }, body: JSON.stringify(body) });
-        const data = await res.json();
-        if (res.ok) {
-          const raw = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") || "";
-          render(JSON.parse(raw.replace(/```json|```/g, "").trim()));
-          btn.disabled = false; btn.textContent = "మళ్ళీ పరిశీలించు · Check again";
-          return;
-        }
-        lastErr = data?.error?.message || ("HTTP " + res.status);
-        const retryable = [500, 502, 503, 429].includes(res.status) || /overload|high demand|unavailable|try again/i.test(lastErr);
-        if (!retryable) break;
-      } catch (e) { lastErr = e.message; }
-      btn.innerHTML = '<span class="spinner"></span>మళ్ళీ ప్రయత్నిస్తోంది… (' + (i + 1) + ')';
-      await sleep(1200 * (i + 1));
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageB64: imgB64, mimeType: imgMime, note: $("note").value || "" })
+      });
+      if (!res.ok) {
+        let msg = "HTTP " + res.status;
+        try { const e = await res.json(); msg = e.error || msg; } catch (_) {}
+        throw new Error(msg);
+      }
+      render(await res.json());
+    } catch (e) {
+      showErr("లోపం / Error: " + e.message + " — కొన్ని సెకన్లు ఆగి మళ్ళీ ప్రయత్నించండి. (Please wait a few seconds and try again.)");
+    } finally {
+      btn.disabled = false; btn.textContent = "మళ్ళీ పరిశీలించు · Check again";
     }
-    showErr("లోపం / Error: " + lastErr + " — Gemini బిజీగా ఉంది లేదా key/quota సమస్య. కొన్ని సెకన్లు ఆగి మళ్ళీ ప్రయత్నించండి. (Busy or key/quota issue — wait a few seconds and try again.)");
-    $("go").disabled = false; $("go").textContent = "మళ్ళీ పరిశీలించు · Check again";
   }
 
   const esc = s => String(s).replace(/[&<>]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[c]));
