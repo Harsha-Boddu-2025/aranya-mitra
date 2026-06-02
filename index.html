@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aranya Mitra · అరణ్య మిత్ర</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c1f14; --paper: #fbf9f1; --leaf: #4caf6d; --moss: #9ccf86; --pine: #2e6b43;
+    --cream: #f3efe2; --bark: #34271b; --danger: #d8392b; --caution: #e8941f; --unsure: #5d6b63;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hanken Grotesk", "Noto Sans Telugu", sans-serif; min-height: 100vh; color: var(--cream); line-height: 1.55;
+    background: radial-gradient(120% 60% at 50% -5%, rgba(76,175,109,0.16), transparent 60%), linear-gradient(180deg, #0c1f14 0%, #0a1a11 100%);
+    background-attachment: fixed;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .te { font-family: "Noto Sans Telugu", "Hanken Grotesk", sans-serif; }
+  .wrap { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 18px 18px 64px; }
+
+  /* ---- Hero slideshow ---- */
+  .hero { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 22px 50px -26px rgba(0,0,0,0.85); aspect-ratio: 5 / 3; }
+  .slide { position: absolute; inset: 0; opacity: 0; animation: fade 21s infinite; }
+  .slide:nth-child(1) { animation-delay: 0s; }
+  .slide:nth-child(2) { animation-delay: 7s; }
+  .slide:nth-child(3) { animation-delay: 14s; }
+  .slide svg { display: block; width: 100%; height: 100%; }
+  @keyframes fade { 0%{opacity:0} 5%{opacity:1} 33%{opacity:1} 38%{opacity:0} 100%{opacity:0} }
+  @media (prefers-reduced-motion: reduce) { .slide { animation: none; } .slide:nth-child(1){ opacity:1; } }
+
+  .hero-overlay { position: absolute; inset: auto 0 0 0; padding: 30px 22px 20px; text-align: center; z-index: 2;
+    background: linear-gradient(180deg, transparent, rgba(8,20,13,0.5) 45%, rgba(8,20,13,0.92)); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--moss); background: rgba(156,207,134,0.16); border: 1px solid rgba(156,207,134,0.4); padding: 4px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-family: "Fraunces", serif; font-weight: 600; font-size: 2rem; line-height: 1; letter-spacing: -0.01em; color: #fff; }
+  h1 .te { display: block; font-weight: 700; font-size: 1.35rem; color: var(--moss); margin-top: 4px; }
+  .tag { color: rgba(243,239,226,0.86); font-size: 0.95rem; margin: 18px auto 22px; max-width: 44ch; text-align: center; }
+  .tag b { color: var(--moss); }
+
+  .warn-strip { display: flex; gap: 10px; align-items: flex-start; text-align: left; background: rgba(216,57,43,0.12);
+    border: 1px solid rgba(216,57,43,0.42); color: #ffd9d3; border-radius: 14px; padding: 12px 15px; font-size: 0.86rem; margin-bottom: 18px; }
+  .warn-strip .x { font-size: 1.05rem; line-height: 1.3; }
+
+  .card { background: var(--paper); color: var(--bark); border-radius: 20px; padding: 18px; margin-bottom: 14px; box-shadow: 0 16px 34px -24px rgba(0,0,0,0.7); }
+  label.lbl { display: block; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--pine); margin-bottom: 9px; }
+  .hint { font-size: 0.8rem; opacity: 0.62; margin-top: 8px; }
+  input[type=password], input[type=text] { width: 100%; font: inherit; padding: 13px 15px; border-radius: 12px; border: 1.5px solid #ddd6c4; background: #fff; color: var(--bark); }
+  input:focus { outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgba(76,175,109,0.18); }
+
+  .drop { border: 2px dashed rgba(46,107,67,0.42); border-radius: 16px; padding: 32px 16px; text-align: center; cursor: pointer; transition: .18s; background: #eef4e8; color: var(--pine); }
+  .drop:hover { background: #e6f1de; border-color: var(--leaf); }
+  .drop.has { padding: 0; border-style: solid; overflow: hidden; }
+  .drop img { display: block; width: 100%; max-height: 300px; object-fit: cover; }
+  .drop .ic { font-size: 1.8rem; }
+  .drop .t { font-weight: 600; margin-top: 7px; }
+  .drop .s { font-size: 0.82rem; opacity: 0.7; margin-top: 3px; }
+
+  button.go { width: 100%; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.1rem; color: #fff; border: none; border-radius: 14px; padding: 16px;
+    background: linear-gradient(135deg, var(--leaf), var(--pine)); cursor: pointer; box-shadow: 0 14px 28px -12px rgba(76,175,109,0.75); transition: .15s; margin-top: 4px; }
+  button.go:hover { transform: translateY(-1px); }
+  button.go:disabled { opacity: 0.55; cursor: progress; transform: none; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -3px; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #out { display: none; margin-top: 18px; }
+  .verdict { border-radius: 18px; padding: 18px 20px; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 15px; }
+  .verdict.danger { background: linear-gradient(135deg, #d8392b, #9e2018); }
+  .verdict.caution { background: linear-gradient(135deg, #e8941f, #bd6c0a); }
+  .verdict.unsure { background: linear-gradient(135deg, #6c7a71, #4a564e); }
+  .verdict .big { font-size: 2.1rem; line-height: 1; }
+  .verdict .v-te { font-family: "Noto Sans Telugu", sans-serif; font-weight: 700; font-size: 1.25rem; }
+  .verdict .v-en { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; opacity: 0.88; margin-top: 4px; }
+
+  .res { background: var(--paper); color: var(--bark); border-radius: 18px; padding: 18px; }
+  .res h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 0.98rem; color: var(--pine); margin: 16px 0 8px; display: flex; gap: 8px; align-items: center; }
+  .res h3:first-child { margin-top: 0; }
+  .res p, .res li { font-family: "Noto Sans Telugu", sans-serif; }
+  .res ul { list-style: none; display: grid; gap: 7px; }
+  .res ul li { background: #f0ece0; border-left: 3px solid var(--leaf); border-radius: 0 9px 9px 0; padding: 9px 13px; }
+  .res ul.aid li { border-left-color: var(--danger); background: #fcf0ee; }
+
+  .sos { display: block; width: 100%; text-align: center; margin-top: 16px; background: var(--danger); color: #fff; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 14px; font-family: "Noto Sans Telugu", sans-serif; }
+  .footer-warn { margin-top: 16px; padding: 15px; border-radius: 14px; background: var(--bark); color: #f0e6d6; text-align: center; font-family: "Noto Sans Telugu", sans-serif; font-size: 0.9rem; line-height: 1.6; }
+  .footer-warn b { color: var(--moss); }
+  .err { background: #fcebe8; border: 1px solid #f3b6ad; color: #a3271b; border-radius: 12px; padding: 12px 14px; margin-top: 12px; font-size: 0.9rem; display: none; }
+  footer { text-align: center; font-size: 0.78rem; opacity: 0.5; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <!-- Scene 1: misty dawn -->
+    <div class="slide">
+      <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6ecd4"/><stop offset="0.45" stop-color="#e7ddc4"/><stop offset="1" stop-color="#cdd9c1"/></linearGradient>
+          <radialGradient id="sun1" cx="0.7" cy="0.2" r="0.4"><stop offset="0" stop-color="#fdf3d8"/><stop offset="0.6" stop-color="#f6e6c0" stop-opacity="0.5"/><stop offset="1" stop-color="#f6e6c0" stop-opacity="0"/></radialGradient>
+          <linearGradient id="a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#aecbb6"/><stop offset="1" stop-color="#8fb59c"/></linearGradient>
+          <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fa37f"/><stop offset="1" stop-color="#558a68"/></linearGradient>
+          <linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f7d59"/><stop offset="1" stop-color="#2c6043"/></linearGradient>
+          <linearGradient id="d1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f4a30"/><stop offset="1" stop-color="#14311f"/></linearGradient>
+          <filter id="s1"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <rect width="600" height="360" fill="url(#sky1)"/><rect width="600" height="360" fill="url(#sun1)"/>
+        <circle cx="430" cy="74" r="33" fill="#fdf6e2"/>
+        <path d="M0,160 C90,132 170,144 250,122 C340,98 420,144 500,122 C545,110 575,122 600,114 L600,360 L0,360 Z" fill="url(#a1)" filter="url(#s1)"/>
+        <ellipse cx="300" cy="174" rx="360" ry="24" fill="#f3efe2" opacity="0.55" filter="url(#s1)"/>
+        <path d="M0,216 C110,182 200,206 300,188 C400,170 470,216 560,198 C580,194 592,198 600,196 L600,360 L0,360 Z" fill="url(#b1)"/>
+        <ellipse cx="320" cy="228" rx="300" ry="16" fill="#eef0e4" opacity="0.4" filter="url(#s1)"/>
+        <path d="M0,278 C120,242 210,270 330,254 C430,242 500,280 600,262 L600,360 L0,360 Z" fill="url(#c1)"/>
+        <path d="M0,322 C140,298 250,322 380,310 C470,302 540,322 600,314 L600,360 L0,360 Z" fill="url(#d1)"/>
+        <g fill="#0f2417"><path d="M16,360 C12,312 30,284 8,254 C40,276 44,312 40,360 Z"/><path d="M584,360 C588,314 568,286 592,258 C560,280 556,314 560,360 Z"/></g>
+      </svg>
+    </div>
+    <!-- Scene 2: misty valley (Araku) -->
+    <div class="slide">
+      <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfeae0"/><stop offset="0.5" stop-color="#c6dccb"/><stop offset="1" stop-color="#aecbb6"/></linearGradient>
+          <linearGradient id="a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd5c1"/><stop offset="1" stop-color="#9bc0a6"/></linearGradient>
+          <linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74a886"/><stop offset="1" stop-color="#4f8c66"/></linearGradient>
+          <linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#357050"/><stop offset="1" stop-color="#205339"/></linearGradient>
+          <linearGradient id="d2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173b26"/><stop offset="1" stop-color="#0f2a1a"/></linearGradient>
+          <filter id="s2"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+        <rect width="600" height="360" fill="url(#sky2)"/>
+        <path d="M0,150 C120,120 220,150 340,124 C440,103 520,142 600,126 L600,360 L0,360 Z" fill="url(#a2)" filter="url(#s2)"/>
+        <ellipse cx="250" cy="166" rx="330" ry="30" fill="#f3efe2" opacity="0.6" filter="url(#s2)"/>
+        <path d="M0,210 C100,178 190,208 300,186 C410,164 500,206 600,190 L600,360 L0,360 Z" fill="url(#b2)"/>
+        <ellipse cx="360" cy="222" rx="300" ry="22" fill="#eef4ec" opacity="0.5" filter="url(#s2)"/>
+        <path d="M0,272 C130,238 230,266 350,250 C450,238 530,272 600,258 L600,360 L0,360 Z" fill="url(#c2)"/>
+        <ellipse cx="200" cy="286" rx="240" ry="14" fill="#eef4ec" opacity="0.35" filter="url(#s2)"/>
+        <path d="M0,320 C150,296 260,318 390,308 C480,300 550,318 600,312 L600,360 L0,360 Z" fill="url(#d2)"/>
+        <g fill="#0c2417"><path d="M30,360 C26,308 48,280 22,248 C58,272 62,310 58,360 Z"/><path d="M570,360 C574,310 552,282 578,250 C546,274 542,310 546,360 Z"/></g>
+      </svg>
+    </div>
+    <!-- Scene 3: golden dusk -->
+    <div class="slide">
+      <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9e3bf"/><stop offset="0.5" stop-color="#f1c79a"/><stop offset="1" stop-color="#d9b890"/></linearGradient>
+          <radialGradient id="sun3" cx="0.32" cy="0.28" r="0.45"><stop offset="0" stop-color="#fff1cf"/><stop offset="0.5" stop-color="#fbd99a" stop-opacity="0.55"/><stop offset="1" stop-color="#fbd99a" stop-opacity="0"/></radialGradient>
+          <linearGradient id="a3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b58c"/><stop offset="1" stop-color="#a99c74"/></linearGradient>
+          <linearGradient id="b3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7f9466"/><stop offset="1" stop-color="#5c7a4e"/></linearGradient>
+          <linearGradient id="c3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c6443"/><stop offset="1" stop-color="#274a32"/></linearGradient>
+          <linearGradient id="d3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a3322"/><stop offset="1" stop-color="#112418"/></linearGradient>
+          <filter id="s3"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <rect width="600" height="360" fill="url(#sky3)"/><rect width="600" height="360" fill="url(#sun3)"/>
+        <circle cx="192" cy="100" r="38" fill="#fff3d4"/>
+        <path d="M0,168 C100,144 200,160 320,138 C430,118 520,154 600,140 L600,360 L0,360 Z" fill="url(#a3)" filter="url(#s3)"/>
+        <ellipse cx="340" cy="182" rx="320" ry="22" fill="#fdeccb" opacity="0.5" filter="url(#s3)"/>
+        <path d="M0,222 C120,192 210,216 330,198 C430,182 510,218 600,204 L600,360 L0,360 Z" fill="url(#b3)"/>
+        <path d="M0,280 C130,250 230,274 350,260 C450,250 530,282 600,268 L600,360 L0,360 Z" fill="url(#c3)"/>
+        <path d="M0,324 C150,302 260,322 390,312 C480,304 550,322 600,316 L600,360 L0,360 Z" fill="url(#d3)"/>
+        <g fill="#0e2316"><path d="M20,360 C16,310 38,282 12,250 C48,274 52,312 48,360 Z"/><path d="M578,360 C582,312 560,284 586,252 C554,276 550,312 554,360 Z"/></g>
+      </svg>
+    </div>
+
+    <div class="hero-overlay">
+      <span class="hero-badge">Eastern Ghats</span>
+      <h1>Aranya Mitra<span class="te">అరణ్య మిత్ర</span></h1>
+    </div>
+  </div>
+
+  <p class="tag te">అడవి మొక్క, ఆకు, పండు లేదా పుట్టగొడుగు ఫోటో తీయండి — అది <b>ప్రమాదకరమా</b> అని తెలుసుకోండి. <span style="opacity:.75">(Photograph a wild plant, leaf, berry or mushroom to check if it's dangerous.)</span></p>
+
+  <div class="warn-strip te"><span class="x">⚠️</span><span>ఇది తినదగినదని ఈ యాప్ ఎప్పుడూ చెప్పదు. అనుమానం ఉంటే తినవద్దు. <span style="opacity:.85">This app never says anything is safe to eat.</span></span></div>
+
+  <!-- API key card: auto-hidden once you embed your key in the API_KEY constant below -->
+  <div class="card" id="keyCard">
+    <label class="lbl" for="key">Gemini API Key</label>
+    <input id="key" type="password" placeholder="AIza… (Google AI Studio లో ఉచితంగా)" autocomplete="off" />
+    <p class="hint">Key మీ ఫోన్/బ్రౌజర్‌లోనే ఉంటుంది. Get a free key at aistudio.google.com → "Get API key".</p>
+  </div>
+
+  <div class="card">
+    <label class="lbl">ఫోటో / Photo</label>
+    <div class="drop" id="drop">
+      <div class="ic">🌿</div>
+      <div class="t te">ఫోటో తీయండి / ఎంచుకోండి</div>
+      <div class="s">Tap to take or upload a clear photo of the plant or mushroom</div>
+    </div>
+    <input id="file" type="file" accept="image/*" capture="environment" hidden />
+    <div style="margin-top:14px">
+      <label class="lbl" for="note">గమనిక / Note (optional)</label>
+      <input id="note" type="text" placeholder="ఏ భాషలోనైనా రాయవచ్చు · Note in any language…" />
+    </div>
+  </div>
+
+  <button class="go" id="go">పరిశీలించు · Check</button>
+  <div class="err" id="err"></div>
+
+  <div id="out">
+    <div class="verdict" id="verdict">
+      <div class="big" id="vIcon">⚠️</div>
+      <div><div class="v-te te" id="vTe"></div><div class="v-en" id="vEn"></div></div>
+    </div>
+    <div class="res">
+      <h3 class="te">🌱 ఏమిటి · What it likely is</h3>
+      <p class="te" id="name"></p>
+      <p class="te" id="what" style="margin-top:4px;opacity:.85"></p>
+      <h3 class="te">☠️ ఎందుకు ప్రమాదం · Why it's dangerous</h3>
+      <p class="te" id="why"></p>
+      <h3 class="te">🤢 తింటే లక్షణాలు · Symptoms if eaten</h3>
+      <ul class="te" id="symptoms"></ul>
+      <h3 class="te">🩹 ఎవరైనా తినేస్తే · First aid if already eaten</h3>
+      <ul class="te aid" id="aid"></ul>
+      <a class="sos" href="tel:108">📞 అత్యవసరం? 108 కి కాల్ చేయండి / Call 108</a>
+    </div>
+    <div class="footer-warn te"><b>గుర్తుంచుకోండి:</b> ఫోటో ఆధారంగా అడవి మొక్కలు/పుట్టగొడుగులు ఎప్పుడూ తినవద్దు. ఇది మార్గదర్శకం మాత్రమే, నిపుణుని ధృవీకరణ కాదు. <br><span style="opacity:.8">Never eat wild plants or mushrooms based on a photo. Guidance only — not expert confirmation.</span></div>
+  </div>
+
+  <footer>Powered by Google Gemini · Built for Eastern Ghats foragers · అరణ్య మిత్ర</footer>
+</div>
+
+<script>
+  // ===================================================================
+  //  PASTE YOUR FREE GEMINI API KEY BETWEEN THE QUOTES BELOW.
+  //  When it is filled in, the on-screen key box disappears and users
+  //  can just upload a photo and check. Leave it "" during development.
+  // ===================================================================
+  const API_KEY = "";
+
+  // Free-tier multimodal models, tried in order with automatic retry on overload.
+  const MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const $ = id => document.getElementById(id);
+  let imgB64 = null, imgMime = null;
+
+  // Hide the key box if a key is embedded.
+  if (API_KEY) $("keyCard").style.display = "none";
+  const getKey = () => API_KEY || $("key").value.trim();
+
+  const drop = $("drop"), fileEl = $("file");
+  drop.addEventListener("click", () => fileEl.click());
+  fileEl.addEventListener("change", e => {
+    const f = e.target.files[0]; if (!f) return;
+    imgMime = f.type || "image/jpeg";
+    const r = new FileReader();
+    r.onload = () => { imgB64 = r.result.split(",")[1]; drop.classList.add("has"); drop.innerHTML = '<img alt="preview" src="' + r.result + '">'; };
+    r.readAsDataURL(f);
+  });
+
+  const SYSTEM = `You are an extremely cautious botanist and mycologist who helps foragers and children ANYWHERE IN THE WORLD avoid poisoning. You look at a photo of a wild plant, leaf, berry, flower or mushroom that may come from any country or region.
+
+SAFETY RULES — THESE OVERRIDE EVERYTHING:
+- NEVER tell anyone that any wild plant or mushroom is safe or okay to eat. Edibility cannot be confirmed from a photo, and a wrong "safe" can kill a child.
+- "risk_level" may ONLY be one of: "danger", "caution", "unsure". There is no "safe" option.
+- If the photo is unclear, or you are not confident, use "unsure" and clearly advise NOT to eat it.
+- Mushrooms: be especially conservative — many deadly species look like edible ones. Default to "danger" or "unsure" for any mushroom unless clearly a known harmless ornamental.
+- Always assume a child might eat it. The whole point is to warn, not to certify food.
+
+OUTPUT:
+- Reply ONLY with a JSON object, no markdown.
+- The user's note may be written in ANY language. REPLY IN THE SAME LANGUAGE the user wrote their note in. If there is no note, or the language is unclear, reply in simple Telugu. Keep wording simple enough for someone with little schooling. If the note mentions a place or country, use it as a hint for which species are likely; otherwise do not assume any region. likely_name_en is always a short English label.
+- Keep advice practical and calm, not frightening for no reason.
+
+JSON shape:
+{
+ "risk_level": "danger|caution|unsure",
+ "verdict_te": "ఒక చిన్న వాక్యంలో తీర్పు (ఉదా: ఇది ప్రమాదకరం, తినవద్దు)",
+ "likely_name_te": "సంభావ్య పేరు / రకం",
+ "likely_name_en": "short english label",
+ "what_it_is_te": "ఇది ఏమిటో ఒక వాక్యం",
+ "why_dangerous_te": "ఎందుకు ప్రమాదమో సులభంగా",
+ "symptoms_te": ["తింటే కలిగే లక్షణాలు 2-4"],
+ "first_aid_te": ["ఎవరైనా తినేస్తే వెంటనే చేయవలసినవి 2-4; ఆసుపత్రికి/108కి వెళ్లమని చెప్పండి"]
+}`;
+
+  $("go").addEventListener("click", run);
+
+  async function run() {
+    const key = getKey();
+    $("err").style.display = "none";
+    if (!key) return showErr("ముందుగా Gemini API key ఇవ్వండి. / API key missing.");
+    if (!imgB64) return showErr("ఫోటో ఎంచుకోండి. / Please choose a photo first.");
+
+    const btn = $("go"); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>పరిశీలిస్తోంది…';
+    const userText = `వినియోగదారు గమనిక: ${$("note").value || "—"}\nఈ ఫోటోను పరిశీలించి, పైన చెప్పిన JSON ఆకృతిలో తెలుగులో జాగ్రత్తగా జవాబు ఇవ్వండి.`;
+    const body = {
+      systemInstruction: { parts: [{ text: SYSTEM }] },
+      contents: [{ parts: [ { text: userText }, { inline_data: { mime_type: imgMime, data: imgB64 } } ] }],
+      generationConfig: { responseMimeType: "application/json", temperature: 0.2 }
+    };
+
+    let lastErr = "";
+    for (let i = 0; i < 5; i++) {
+      const model = MODELS[i % MODELS.length];
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+          { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key }, body: JSON.stringify(body) });
+        const data = await res.json();
+        if (res.ok) {
+          const raw = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") || "";
+          render(JSON.parse(raw.replace(/```json|```/g, "").trim()));
+          btn.disabled = false; btn.textContent = "మళ్ళీ పరిశీలించు · Check again";
+          return;
+        }
+        lastErr = data?.error?.message || ("HTTP " + res.status);
+        const retryable = [500, 502, 503, 429].includes(res.status) || /overload|high demand|unavailable|try again/i.test(lastErr);
+        if (!retryable) break;
+      } catch (e) { lastErr = e.message; }
+      btn.innerHTML = '<span class="spinner"></span>మళ్ళీ ప్రయత్నిస్తోంది… (' + (i + 1) + ')';
+      await sleep(1200 * (i + 1));
+    }
+    showErr("లోపం / Error: " + lastErr + " — Gemini బిజీగా ఉంది లేదా key/quota సమస్య. కొన్ని సెకన్లు ఆగి మళ్ళీ ప్రయత్నించండి. (Busy or key/quota issue — wait a few seconds and try again.)");
+    $("go").disabled = false; $("go").textContent = "మళ్ళీ పరిశీలించు · Check again";
+  }
+
+  const esc = s => String(s).replace(/[&<>]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[c]));
+  const li = a => (a || []).map(t => "<li>" + esc(t) + "</li>").join("");
+
+  function render(j) {
+    const r = (j.risk_level || "unsure").toLowerCase();
+    const v = $("verdict"); v.className = "verdict " + (["danger","caution","unsure"].includes(r) ? r : "unsure");
+    $("vIcon").textContent = r === "danger" ? "☠️" : r === "caution" ? "⚠️" : "❓";
+    $("vTe").textContent = j.verdict_te || "";
+    $("vEn").textContent = ({ danger:"Dangerous — do not eat", caution:"Be careful — do not eat", unsure:"Not sure — do not eat" })[r] || "Do not eat";
+    $("name").textContent = (j.likely_name_te || "") + (j.likely_name_en ? "  ·  " + j.likely_name_en : "");
+    $("what").textContent = j.what_it_is_te || "";
+    $("why").textContent = j.why_dangerous_te || "";
+    $("symptoms").innerHTML = li(j.symptoms_te);
+    $("aid").innerHTML = li(j.first_aid_te);
+    $("out").style.display = "block";
+    $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function showErr(m){ const e = $("err"); e.textContent = m; e.style.display = "block"; }
+</script>
+</body>
+</html>
